@@ -53,9 +53,11 @@ $fromUser=$postObj->ToUserName;
      $citycode = $html2->data[0];
      
      //通过citycode找到天气信息
-     $url='http://t.weather.sojson.com/api/weather/city/'.$citycode;
+     $url='http://www.redpanda233.xyz/api/weathers/read/id/'.$citycode;
+     //$url= 'http://www.redpanda233.xyz/api/weathers/read/id/101010100';
 	 //json_decode解析了json格式，组成字典，方便使用
      $html = json_decode(file_get_contents($url));
+     //$html = file_get_contents($url);
      
 $time =time();
 $msgType ='text';
@@ -63,7 +65,8 @@ $msgType ='text';
      if($html->status==200) //200表示服务器正常处理了请求
 		$content ='您查询的城市：'.$html->cityInfo->city.' 天气：'.$html->data->forecast[0]->type.' 湿度: '.$html->data->shidu.' pm25: '.$html->data->pm25.' 空气质量：'.$html->data->quality;
      else
-       $content ='没有这个城市的编码';
+        $content ='没有这个城市的编码';
+       //$content =$html->cityInfo->city;
      
 $template ="<xml>
     <ToUserName><![CDATA[%s]]></ToUserName>
